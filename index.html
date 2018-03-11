@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CADC XXV</title>
+  <meta name="description" content="CADC XXV RSVP">
+  <link href="./images/favicon.ico" rel="shortcut icon">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://unpkg.com/prefixfree@1.0.0/prefixfree.min.js"></script>
+
+  <script src="https://wzrd.in/standalone/formdata-polyfill@latest"></script>
+  <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
+  <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
+  <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+  <div class="cadc-xxv-info">
+    <h1> CADC XXV. </h1>
+    <p> 5.11.2019 </p>
+    <p> Let us know you're attending! </p>
+  </div>
+  <div class="form-container">
+    <form name="cadc-xxv">
+      <input name="firstName" type="text" placeholder="First Name*" required>
+      <input name="lastName" type="text" placeholder="Last Name*" required>
+      <input name="email" type="email" placeholder="Email*" required>
+      <input name="phoneNumber" type="tel" placeholder="Phone Number*" required>
+      <input name="class" type="text" placeholder="Class*" required>
+      <select name="house" required>
+        <option value="" disabled selected>House*</option>
+        <option value="gryffindor">Gryffindor</option>
+        <option value="hufflepuff">Hufflepuff</option>
+        <option value="ravenclaw">Ravenclaw</option>
+        <option value="slytherin">Slytherin</option>
+      </select>
+      <p> Or what you think your house is.. </p>
+      <div class="form-group">
+        <input name="plusOne" type="checkbox" id="plusOne">
+        <label for="plusOne">Will you have a +1?</label>
+      </div>
+      <input class="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
+      <button type="submit">Send RSVP</button>
+    </form>
+
+    <div class="loading js-loading is-hidden">
+      <div class="loading-spinner">
+        <svg><circle cx="25" cy="25" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg>
+      </div>
+    </div>
+
+    <p class="js-success-message is-hidden">Thank you for RSVPing!</p>
+    <p class="js-error-message is-hidden">Oops. Something went wrong, please try again.</p>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxj0hikrnGWjZM8GTHlIU8gyDAto2zQ1PnuNo7CO3rCVdkalyI/exec'
+    const form = document.forms['cadc-xxv']
+    const loading = document.querySelector('.js-loading')
+    const successMessage = document.querySelector('.js-success-message')
+    const errorMessage = document.querySelector('.js-error-message')
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      showLoadingIndicator()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => showSuccessMessage(response))
+        .catch(error => showErrorMessage(error))
+    })
+
+    function showLoadingIndicator () {
+      form.classList.add('is-hidden')
+      loading.classList.remove('is-hidden')
+    }
+
+    function showSuccessMessage (response) {
+      console.log('Success!', response)
+      setTimeout(() => {
+        successMessage.classList.remove('is-hidden')
+        loading.classList.add('is-hidden')
+      }, 500)
+    }
+
+    function showErrorMessage (error) {
+      console.error('Error!', error.message)
+      setTimeout(() => {
+        errorMessage.classList.remove('is-hidden')
+        loading.classList.add('is-hidden')
+      }, 500)
+    }
+
+    $('#plusOne').click(function() {
+      $('.plusOneName')[this.checked ? "show" : "hide"]();
+    });
+  </script>
+
+</body>
+</html>
