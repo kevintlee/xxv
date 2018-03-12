@@ -15,6 +15,7 @@
   <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
   <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
   <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
 <body>
   <div class="cadc-xxv-info">
@@ -27,22 +28,49 @@
       <input name="firstName" type="text" placeholder="First Name*" required>
       <input name="lastName" type="text" placeholder="Last Name*" required>
       <input name="email" type="email" placeholder="Email*" required>
-      <input name="phoneNumber" type="tel" placeholder="Phone Number*" required>
-      <input name="class" type="text" placeholder="Class*" required>
-      <select name="house" required>
+      <input id="phoneNumber" name="phoneNumber" type="tel" placeholder="Phone Number*" required>
+      <select name="class" class="inputMargin" required>
+        <option value="" disabled selected>Class*</option>
+        <option value="camodern">CAmodern (PreAlpha)</option>
+        <option value="alpha">Alpha</option>
+        <option value="beta">Beta</option>
+        <option value="gamma">Gamma</option>  
+        <option value="delta">Delta</option>
+        <option value="epsilon">Epsilon</option>
+        <option value="zeta">Zeta</option>    
+        <option value="eta">Eta</option>
+        <option value="theta">Theta</option>
+        <option value="iota">Gamma</option>       
+        <option value="kappa">Kappa</option>
+        <option value="lambda">Lambda</option>
+        <option value="mu">Mu</option>  
+        <option value="nu">Nu</option>
+        <option value="xi">Xi</option>
+        <option value="omicron">Omicron</option>    
+        <option value="pi">Pi</option>
+        <option value="rho">Rho</option>
+        <option value="sigma">Sigma</option>         
+        <option value="tau">Tau</option>  
+        <option value="honorary">Honorary</option>                            
+      </select>
+
+      <select id="hpHouse" name="house" required>
         <option value="" disabled selected>House*</option>
         <option value="gryffindor">Gryffindor</option>
         <option value="hufflepuff">Hufflepuff</option>
         <option value="ravenclaw">Ravenclaw</option>
         <option value="slytherin">Slytherin</option>
       </select>
-      <p> Or what you think your house is.. </p>
+
+      <div class="inputMargin" id="houseInfo"style="display:none" ></div>
+      
+      <p class="inputMargin" > Or what you think your house is.. </p>
       <div class="form-group">
         <input name="plusOne" type="checkbox" id="plusOne">
         <label for="plusOne">Will you have a +1?</label>
       </div>
       <input class="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
-      <button type="submit">Send RSVP</button>
+      <button onsubmit="return validateForm()" type="submit">Send RSVP</button>
     </form>
 
     <div class="loading js-loading is-hidden">
@@ -91,9 +119,37 @@
       }, 500)
     }
 
+
     $('#plusOne').click(function() {
       $('.plusOneName')[this.checked ? "show" : "hide"]();
     });
+
+     $('#phoneNumber').mask('(000) 000-0000');
+    
+    var hpHouse = jQuery('#hpHouse')
+    hpHouse.change(function(){
+     
+      if ($(this).val() == 'gryffindor') {
+        var output = $(this).val();
+          console.log(output);
+          $('#houseInfo').text('Gryffindor values bravery, daring, nerve, and chivalry.')
+          $('#houseInfo').show();;
+      }if($(this).val() == 'hufflepuff'){
+          $('#houseInfo').text('Hufflepuff values hard work, dedication, patience, loyalty, and fair play.')
+          $('#houseInfo').show();;        
+      }
+      if ($(this).val() == 'ravenclaw') {
+          $('#houseInfo').text('Ravenclaw values intelligence, knowledge, and wit.')
+          $('#houseInfo').show();;
+      }if($(this).val() == 'slytherin'){
+          $('#houseInfo').text('Slytherin house values ambition, cunning and resourcefulness.')
+          $('#houseInfo').show();;        
+      }
+      else $('.houseInfo').hide();
+    });
+
+
+
   </script>
 
 </body>
