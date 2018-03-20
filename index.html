@@ -31,8 +31,8 @@
       <input name="email" type="email" placeholder="Email*" required>
       <input id="phoneNumber" name="phoneNumber" type="tel" placeholder="Phone Number*" required>
       <select name="class" class="inputMargin" required>
-        <option value="" disabled selected>Class*</option>
-        <option value="camodern">CAmodern (PreAlpha)</option>
+        <option value="" disabled selected>Select your Class*</option>
+        <option value="camodern">CA Modern (Pre-alpha)</option>
         <option value="alpha">Alpha</option>
         <option value="beta">Beta</option>
         <option value="gamma">Gamma</option>
@@ -55,16 +55,16 @@
         <option value="honorary">Honorary</option>
       </select>
 
-      <select id="hpHouse" name="house" required>
-        <option value="" disabled selected>House*</option>
-        <option value="gryffindor">Gryffindor</option>
-        <option value="hufflepuff">Hufflepuff</option>
-        <option value="ravenclaw">Ravenclaw</option>
-        <option value="slytherin">Slytherin</option>
+      <select id="hpHouse" name="house" class="inputMargin" required>
+        <option value="" disabled selected>Select your House*</option>
+        <option value="Gryffindor">Gryffindor</option>
+        <option value="Hufflepuff">Hufflepuff</option>
+        <option value="Ravenclaw">Ravenclaw</option>
+        <option value="Slytherin">Slytherin</option>
       </select>
-      <p class="inputMargin" > Or what you think your house is.. </p>
-      <img class="inputMargin" id="houseImg" class="house"></img>
-      <div class="inputMargin" id="houseInfo" class="house"></div>
+      <p class="houseInstructions inputMargin"> Or what you think your house is.. </p>
+      <img class="inputMargin house" id="houseImg"></img>
+      <div class="inputMargin house" id="houseInfo"></div>
 
       <div class="form-group">
         <input name="plusOne" type="checkbox" id="plusOne">
@@ -129,19 +129,24 @@
 
     var hpHouse = jQuery('#hpHouse')
     hpHouse.change(function(){
-      if ($(this).val() == 'gryffindor') {
+      $('.houseInstructions').text('Are you a ' + $(this).val() + '?');
+      if ($(this).val() == 'Gryffindor') {
         var output = $(this).val();
           $('#houseInfo').text('Gryffindor values bravery, daring, nerve, and chivalry.');
           $("#houseImg").attr("src","./images/Gryffindor_Crest.png");
-      } else if($(this).val() == 'hufflepuff') {
+          $('.house').show();
+      } else if($(this).val() == 'Hufflepuff') {
           $('#houseInfo').text('Hufflepuff values hard work, dedication, patience, loyalty, and fair play.');
           $("#houseImg").attr("src","./images/Hufflepuff_Crest.png");
-      } else if ($(this).val() == 'ravenclaw') {
+          $('.house').show();
+      } else if ($(this).val() == 'Ravenclaw') {
           $('#houseInfo').text('Ravenclaw values intelligence, knowledge, and wit.');
           $("#houseImg").attr("src","./images/RavenClaw_Crest.png");
-      } else if($(this).val() == 'slytherin') {
+          $('.house').show();
+      } else if($(this).val() == 'Slytherin') {
           $('#houseInfo').text('Slytherin house values ambition, cunning and resourcefulness.');
           $("#houseImg").attr("src","./images/Slytherin_Crest.png");
+          $('.house').show();
       }
     });
   </script>

@@ -49,8 +49,9 @@
       font-size: inherit;
       background: #eee;
       border-radius: 3px;
-      padding: 1rem;
+      padding: 1rem .6rem;
       width: 100%;
+      color: #757575;
     }
 
     select {
@@ -72,6 +73,10 @@
     #houseImg {
       height: 40%;
       width: 50%;
+    }
+
+    .houseInstructions {
+      font-weight: bold;
     }
 
     input {
