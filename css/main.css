@@ -65,8 +65,13 @@
       display: block;
     }
 
-    .plusOneName {
+    .plusOneName, .house {
       display: none;
+    }
+
+    #houseImg {
+      height: 40%;
+      width: 50%;
     }
 
     input {
