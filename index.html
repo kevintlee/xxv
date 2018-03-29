@@ -16,6 +16,7 @@
   <script src="http://code.jquery.com/jquery.js"></script>
   <script src="js/sheetrock.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
   <div class="cadc-xxv-info">
@@ -30,41 +31,41 @@
       <input name="email" type="email" placeholder="Email*" required>
       <input id="phoneNumber" name="phoneNumber" type="tel" placeholder="Phone Number*" required>
       <select name="class" class="inputMargin" required>
-        <option value="" disabled selected>Class*</option>
-        <option value="camodern">CAmodern (PreAlpha)</option>
+        <option value="" disabled selected>Select your Class*</option>
+        <option value="camodern">CA Modern (Pre-alpha)</option>
         <option value="alpha">Alpha</option>
         <option value="beta">Beta</option>
-        <option value="gamma">Gamma</option>  
+        <option value="gamma">Gamma</option>
         <option value="delta">Delta</option>
         <option value="epsilon">Epsilon</option>
-        <option value="zeta">Zeta</option>    
+        <option value="zeta">Zeta</option>
         <option value="eta">Eta</option>
         <option value="theta">Theta</option>
-        <option value="iota">Gamma</option>       
+        <option value="iota">Gamma</option>
         <option value="kappa">Kappa</option>
         <option value="lambda">Lambda</option>
-        <option value="mu">Mu</option>  
+        <option value="mu">Mu</option>
         <option value="nu">Nu</option>
         <option value="xi">Xi</option>
-        <option value="omicron">Omicron</option>    
+        <option value="omicron">Omicron</option>
         <option value="pi">Pi</option>
         <option value="rho">Rho</option>
-        <option value="sigma">Sigma</option>         
-        <option value="tau">Tau</option>  
-        <option value="honorary">Honorary</option>                            
+        <option value="sigma">Sigma</option>
+        <option value="tau">Tau</option>
+        <option value="honorary">Honorary</option>
       </select>
 
-      <select id="hpHouse" name="house" required>
-        <option value="" disabled selected>House*</option>
-        <option value="gryffindor">Gryffindor</option>
-        <option value="hufflepuff">Hufflepuff</option>
-        <option value="ravenclaw">Ravenclaw</option>
-        <option value="slytherin">Slytherin</option>
+      <select id="hpHouse" name="house" class="inputMargin" required>
+        <option value="" disabled selected>Select your House*</option>
+        <option value="Gryffindor">Gryffindor</option>
+        <option value="Hufflepuff">Hufflepuff</option>
+        <option value="Ravenclaw">Ravenclaw</option>
+        <option value="Slytherin">Slytherin</option>
       </select>
+      <p class="houseInstructions inputMargin"> Or what you think your house is.. </p>
+      <img class="inputMargin house" id="houseImg"></img>
+      <div class="inputMargin house" id="houseInfo"></div>
 
-      <div class="inputMargin" id="houseInfo"style="display:none" ></div>
-      
-      <p class="inputMargin" > Or what you think your house is.. </p>
       <div class="form-group">
         <input name="plusOne" type="checkbox" id="plusOne">
         <label for="plusOne">Will you have a +1?</label>
@@ -147,31 +148,29 @@
     });
 
      $('#phoneNumber').mask('(000) 000-0000');
-    
+
     var hpHouse = jQuery('#hpHouse')
     hpHouse.change(function(){
-     
-      if ($(this).val() == 'gryffindor') {
+      $('.houseInstructions').text('Are you a ' + $(this).val() + '?');
+      if ($(this).val() == 'Gryffindor') {
         var output = $(this).val();
-          console.log(output);
-          $('#houseInfo').text('Gryffindor values bravery, daring, nerve, and chivalry.')
-           $('#houseInfo').show();;
-      }if($(this).val() == 'hufflepuff'){
-          $('#houseInfo').text('Hufflepuff values hard work, dedication, patience, loyalty, and fair play.')
-          $('#houseInfo').show();;        
+          $('#houseInfo').text('Gryffindor values bravery, daring, nerve, and chivalry.');
+          $("#houseImg").attr("src","./images/Gryffindor_Crest.png");
+          $('.house').show();
+      } else if($(this).val() == 'Hufflepuff') {
+          $('#houseInfo').text('Hufflepuff values hard work, dedication, patience, loyalty, and fair play.');
+          $("#houseImg").attr("src","./images/Hufflepuff_Crest.png");
+          $('.house').show();
+      } else if ($(this).val() == 'Ravenclaw') {
+          $('#houseInfo').text('Ravenclaw values intelligence, knowledge, and wit.');
+          $("#houseImg").attr("src","./images/RavenClaw_Crest.png");
+          $('.house').show();
+      } else if($(this).val() == 'Slytherin') {
+          $('#houseInfo').text('Slytherin house values ambition, cunning and resourcefulness.');
+          $("#houseImg").attr("src","./images/Slytherin_Crest.png");
+          $('.house').show();
       }
-      if ($(this).val() == 'ravenclaw') {
-          $('#houseInfo').text('Ravenclaw values intelligence, knowledge, and wit.')
-          $('#houseInfo').show();;
-      }if($(this).val() == 'slytherin'){
-          $('#houseInfo').text('Slytherin house values ambition, cunning and resourcefulness.')
-          $('#houseInfo').show();;        
-      }
-      else $('.houseInfo').hide();
     });
-
-
-
   </script>
 
 </body>
