@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>CADC XXV</title>
   <meta name="description" content="CADC XXV RSVP">
   <link href="./images/favicon.ico" rel="shortcut icon">
@@ -15,6 +14,7 @@
   <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
   <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
   <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="js/sheetrock.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
 <body>
@@ -81,9 +81,31 @@
 
     <p class="js-success-message is-hidden">Thank you for your RSVP!</p>
     <p class="js-error-message is-hidden">Oops. Something went wrong, please try again.</p>
+    <div class="going" style="padding-top:50px" >
+      <p>See Whos Going:</p>
+      <table id="my-table"></table>
+    </div>
   </div>
 
+  
   <script>
+
+    //JSON From Sheets
+    // $.getJSON('https://script.google.com/macros/s/AKfycbxj0hikrnGWjZM8GTHlIU8gyDAto2zQ1PnuNo7CO3rCVdkalyI/exec', { get_param: 'value' }, function(data) {
+    //     $.each(data, function(index, element) {
+    //         $('body').append($('<div>', {
+    //             text: element.going
+    //         }));
+    //     });
+    // });
+
+    // var response = UrlFetchApp.fetch('https://script.google.com/macros/s/AKfycbxj0hikrnGWjZM8GTHlIU8gyDAto2zQ1PnuNo7CO3rCVdkalyI/exec&callback=?');
+    // Logger.log(response.getContextText());
+    $("#my-table").sheetrock({
+      url: "https://docs.google.com/spreadsheets/d/1GcWhApYbPTvNEsoQzm8Dex2O_95c_yTGfs8baQyic7c/edit#gid=266907884",
+      query: "select D Where D <> 'false'"
+    });
+    //JSON API End
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxj0hikrnGWjZM8GTHlIU8gyDAto2zQ1PnuNo7CO3rCVdkalyI/exec'
     const form = document.forms['cadc-xxv']
     const loading = document.querySelector('.js-loading')
@@ -133,7 +155,7 @@
         var output = $(this).val();
           console.log(output);
           $('#houseInfo').text('Gryffindor values bravery, daring, nerve, and chivalry.')
-          $('#houseInfo').show();;
+           $('#houseInfo').show();;
       }if($(this).val() == 'hufflepuff'){
           $('#houseInfo').text('Hufflepuff values hard work, dedication, patience, loyalty, and fair play.')
           $('#houseInfo').show();;        
