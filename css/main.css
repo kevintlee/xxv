@@ -17,7 +17,7 @@
       line-height: 1.4;
     }
 
-    .cadc-xxv-info{
+    .cadc-xxv-info {
       display: flex;
       flex-flow: column;
       padding-bottom: 15px;
@@ -44,7 +44,6 @@
     }
 
     input, button, select {
-      appearance: none;
       border: none;
       font-size: inherit;
       background: #eee;
@@ -55,6 +54,7 @@
     }
 
     select {
+      -webkit-appearance: select;
       height: 50px;
     }
 
@@ -62,12 +62,21 @@
       width: auto;
     }
 
-    input[type=checkbox]:checked .plusOneName{
+    input[type=checkbox]:checked .plusOneName {
       display: block;
     }
 
-    .plusOneName, .house {
+    .plusOneName, .house, .plusOneDescription {
       display: none;
+    }
+
+    .plusOneDescription {
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .showDescription {
+      display: inline-block;
     }
 
     #houseImg {
@@ -97,6 +106,10 @@
       background-color: var(--accent);
     }
 
+    .secondary-button {
+      width: 70%;
+    }
+
     .is-hidden {
       display: none !important;
     }
@@ -110,8 +123,12 @@
       margin-bottom: 0.5rem;
     }
 
-    .form-group {
+    .checkbox-group {
       float: left;
+    }
+
+    .form-group {
+      width: 100%;
     }
 
     .form-group label {
@@ -160,8 +177,14 @@
       animation: dash 1.5s ease-in-out infinite;
     }
 
-
-
-    .inputMargin{
+    .inputMargin {
       margin-bottom:1rem;
+    }
+
+    #my-table tr:nth-child(n+6) {
+      display: none;
+    }
+
+    .going p {
+      font-weight: bold;
     }

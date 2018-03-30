@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CADC XXV</title>
   <meta name="description" content="CADC XXV RSVP">
-  <link href="./images/favicon.ico" rel="shortcut icon">
+  <link href="../images/favicon.ico" rel="shortcut icon">
 
   <link rel="stylesheet" href="css/main.css">
   <script src="https://unpkg.com/prefixfree@1.0.0/prefixfree.min.js"></script>
@@ -21,7 +21,7 @@
 <body>
   <div class="cadc-xxv-info">
     <h1> CADC XXV. </h1>
-    <p> Date: TBA </p>
+    <p> May 4, 2019 </p>
     <p> Let us know you're attending! </p>
   </div>
   <div class="form-container">
@@ -66,12 +66,15 @@
       <img class="inputMargin house" id="houseImg"></img>
       <div class="inputMargin house" id="houseInfo"></div>
 
-      <div class="form-group">
+      <div class="checkbox-group">
         <input name="plusOne" type="checkbox" id="plusOne">
         <label for="plusOne">Will you have a +1?</label>
       </div>
-      <input class="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
-      <button onsubmit="return validateForm()" type="submit">Send RSVP</button>
+      <div class="form-group">
+        <p class="plusOneDescription">If your +1 is DC, please only submit one RSVP.</p>
+        <input class="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
+        <button onsubmit="return validateForm()" type="submit">Send RSVP</button>
+      </div>
     </form>
 
     <div class="loading js-loading is-hidden">
@@ -82,13 +85,14 @@
 
     <p class="js-success-message is-hidden">Thank you for your RSVP!</p>
     <p class="js-error-message is-hidden">Oops. Something went wrong, please try again.</p>
+
     <div class="going" style="padding-top:50px" >
-      <p>See Whos Going:</p>
+      <p>Who's attending?</p>
       <table id="my-table"></table>
     </div>
+    <input type="button" id="seeMoreRecords" value="Show more attendees" class='secondary-button'>
   </div>
 
-  
   <script>
 
     //JSON From Sheets
@@ -145,6 +149,7 @@
 
     $('#plusOne').click(function() {
       $('.plusOneName')[this.checked ? "show" : "hide"]();
+      $('.plusOneDescription').toggleClass('showDescription');
     });
 
      $('#phoneNumber').mask('(000) 000-0000');
@@ -171,6 +176,22 @@
           $('.house').show();
       }
     });
+
+    var btnMore = $("#seeMoreRecords");
+    var showCount = 5;
+    btnMore.click(function (e) {
+      e.preventDefault();
+      maxItems = $('#my-table tr').length - 1;
+      showCount += 5;
+      $('#my-table tr').each(function(index, item) {
+        if (maxItems === index){
+          btnMore.hide();
+        } else {
+          $(item).show();
+        }
+      });
+    });
+
   </script>
 
 </body>
