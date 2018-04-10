@@ -208,6 +208,22 @@
       display: none;
     }
 
+    #my-table tr td {
+      text-align: left;
+    }
+
+    #my-table tr td:nth-child(3) {
+      text-transform: capitalize;
+    }
+
+    #my-table tr td:nth-child(3):before {
+      content: '(';
+    }
+
+    #my-table tr td:nth-child(3):after {
+      content: ')';
+    }
+
     .going p {
       font-weight: bold;
       text-align: left;
