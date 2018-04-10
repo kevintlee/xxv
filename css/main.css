@@ -196,10 +196,19 @@
       margin-bottom:1rem;
     }
 
+    .going {
+      width: 100%;
+    }
+
+    #my-table thead {
+      display: none;
+    }
+
     #my-table tr:nth-child(n+6) {
       display: none;
     }
 
     .going p {
       font-weight: bold;
+      text-align: left;
     }

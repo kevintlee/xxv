@@ -10,9 +10,6 @@
   <link rel="stylesheet" href="css/main.css">
   <script src="https://unpkg.com/prefixfree@1.0.0/prefixfree.min.js"></script>
 
-  <!-- <script src="https://wzrd.in/standalone/formdata-polyfill@latest"></script>
-  <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
-  <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script> -->
   <script src="http://code.jquery.com/jquery.js"></script>
   <script src="js/sheetrock.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -87,21 +84,21 @@
     <p class="js-success-message is-hidden">Thank you for your RSVP!</p>
     <p class="js-error-message is-hidden">Oops. Something went wrong, please try again.</p>
 
-    <!-- <div class="going" style="padding-top:50px" >
+    <div class="going" style="padding-top:50px" >
       <p>Who's attending?</p>
       <table id="my-table"></table>
     </div>
-    <input type="button" id="seeMoreRecords" value="Show more attendees" class='secondary-button'> -->
+    <input type="button" id="seeMoreRecords" value="Show more attendees" class='secondary-button'>
   </div>
   <div class="video-container">
     <iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/zjYo1KPHNIk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
   </div>
 
   <script>
-    // $("#my-table").sheetrock({
-    //   url: "https://docs.google.com/spreadsheets/d/1WeyPKnY8_AJQfucCa_KymIxwlJYfe1iyDRRhNQiYIZU/edit#gid=0",
-    //   query: "select B Where B <> 'false'"
-    // });
+    $("#my-table").sheetrock({
+      url: "https://docs.google.com/spreadsheets/d/1WeyPKnY8_AJQfucCa_KymIxwlJYfe1iyDRRhNQiYIZU/edit#gid=0",
+      query: "select B,C Where B <> 'false'"
+    });
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxRThLf23LehDMqMFLZlwdWwF_9XYHYA_H9p2LVN4RoeRhzS-E/exec'
     const form = document.forms['cadc-xxv']
@@ -220,6 +217,16 @@
         }
       });
     });
+
+    setTimeout(function() {
+      var tableLength = $('#my-table tr').length;
+      console.log(tableLength);
+      if (tableLength > 6) {
+        btnMore.show();
+      } else {
+        btnMore.hide();
+      }
+    }, 100);
   </script>
 
 </body>
