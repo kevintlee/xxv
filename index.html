@@ -26,11 +26,11 @@
   </div>
   <div class="form-container">
     <form name="cadc-xxv">
-      <input name="firstName" type="text" placeholder="First Name*" required>
-      <input name="lastName" type="text" placeholder="Last Name*" required>
-      <input name="email" type="email" placeholder="Email*" required>
+      <input name="firstName" id="firstName" type="text" placeholder="First Name*" required>
+      <input name="lastName" id="lastName" type="text" placeholder="Last Name*" required>
+      <input name="email" id="email" type="email" placeholder="Email*" required>
       <input id="phoneNumber" name="phoneNumber" type="tel" placeholder="Phone Number*" required>
-      <select name="class" class="inputMargin" required>
+      <select id="classYear" name="classYear" class="inputMargin" required>
         <option value="" disabled selected>Select your Class*</option>
         <option value="camodern">CA Modern (Pre-alpha)</option>
         <option value="alpha">Alpha</option>
@@ -55,7 +55,7 @@
         <option value="honorary">Honorary</option>
       </select>
 
-      <select id="hpHouse" name="house" class="inputMargin" required>
+      <select id="house" name="house" class="inputMargin" required>
         <option value="" disabled selected>Select your House*</option>
         <option value="Gryffindor">Gryffindor</option>
         <option value="Hufflepuff">Hufflepuff</option>
@@ -72,8 +72,8 @@
       </div>
       <div class="form-group">
         <p class="plusOneDescription">If your +1 is DC, please only submit one RSVP.</p>
-        <input class="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
-        <button onsubmit="return validateForm()" type="submit">Send RSVP</button>
+        <input class="plusOneName" id="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
+        <button onClick="insert_value()" type="submit" id="b1">Send RSVP</button>
       </div>
     </form>
 
@@ -86,32 +86,22 @@
     <p class="js-success-message is-hidden">Thank you for your RSVP!</p>
     <p class="js-error-message is-hidden">Oops. Something went wrong, please try again.</p>
 
-    <div class="going" style="padding-top:50px" >
+    <!-- <div class="going" style="padding-top:50px" >
       <p>Who's attending?</p>
       <table id="my-table"></table>
     </div>
-    <input type="button" id="seeMoreRecords" value="Show more attendees" class='secondary-button'>
+    <input type="button" id="seeMoreRecords" value="Show more attendees" class='secondary-button'> -->
   </div>
 
   <script>
 
-    //JSON From Sheets
-    // $.getJSON('https://script.google.com/macros/s/AKfycbxj0hikrnGWjZM8GTHlIU8gyDAto2zQ1PnuNo7CO3rCVdkalyI/exec', { get_param: 'value' }, function(data) {
-    //     $.each(data, function(index, element) {
-    //         $('body').append($('<div>', {
-    //             text: element.going
-    //         }));
-    //     });
-    // });
 
-    // var response = UrlFetchApp.fetch('https://script.google.com/macros/s/AKfycbxj0hikrnGWjZM8GTHlIU8gyDAto2zQ1PnuNo7CO3rCVdkalyI/exec&callback=?');
-    // Logger.log(response.getContextText());
     $("#my-table").sheetrock({
-      url: "https://docs.google.com/spreadsheets/d/1GcWhApYbPTvNEsoQzm8Dex2O_95c_yTGfs8baQyic7c/edit#gid=266907884",
-      query: "select D Where D <> 'false'"
+      url: "https://docs.google.com/spreadsheets/d/1WeyPKnY8_AJQfucCa_KymIxwlJYfe1iyDRRhNQiYIZU/edit#gid=0",
+      query: "select B Where B <> 'false'"
     });
-    //JSON API End
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxj0hikrnGWjZM8GTHlIU8gyDAto2zQ1PnuNo7CO3rCVdkalyI/exec'
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxRThLf23LehDMqMFLZlwdWwF_9XYHYA_H9p2LVN4RoeRhzS-E/exec'
     const form = document.forms['cadc-xxv']
     const loading = document.querySelector('.js-loading')
     const successMessage = document.querySelector('.js-success-message')
@@ -147,6 +137,41 @@
     }
 
 
+    // Make an AJAX call to Google Script
+    function insert_value() {
+      showLoadingIndicator();
+
+      // Inputs: firstName	lastName	email	phoneNumber	classYear	house	plusOne	plusOneName
+      var firstName=	$("#firstName").val();
+    	var lastName= $("#lastName").val();
+      var email= $("#email").val();
+      var phoneNumber= $("#phoneNumber").val();
+      var classYear= $("#classYear").val();
+      var house= $("#house").val();
+      var plusOne= $("#plusOne").val();
+      var plusOneName= $("#plusOneName").val();
+
+      var url = scriptURL+"?callback=ctrlq&firstName="+firstName
+                +"&lastName="+lastName
+                +"&email="+email
+                +"&phoneNumber="+phoneNumber
+                +"&classYear="+classYear
+                +"&house="+houseImg
+                +"&plusOne="+plueOne
+                +"&plueOneName="+plueOneName
+                +"&action=insert";
+
+
+      var request = jQuery.ajax({
+        crossDomain: true,
+        url: url ,
+        method: "GET",
+        dataType: "jsonp"
+      }).then(response => showSuccessMessage(response))
+        .catch(error => showErrorMessage(error));
+
+    }
+
     $('#plusOne').click(function() {
       $('.plusOneName')[this.checked ? "show" : "hide"]();
       $('.plusOneDescription').toggleClass('showDescription');
@@ -154,7 +179,7 @@
 
      $('#phoneNumber').mask('(000) 000-0000');
 
-    var hpHouse = jQuery('#hpHouse')
+    var hpHouse = jQuery('#house')
     hpHouse.change(function(){
       $('.houseInstructions').text('Are you a ' + $(this).val() + '?');
       if ($(this).val() == 'Gryffindor') {
@@ -168,7 +193,7 @@
           $('.house').show();
       } else if ($(this).val() == 'Ravenclaw') {
           $('#houseInfo').text('Ravenclaw values intelligence, knowledge, and wit.');
-          $("#houseImg").attr("src","./images/RavenClaw_Crest.png");
+          $("#houseImg").attr("src","./images/Ravenclaw_Crest.png");
           $('.house').show();
       } else if($(this).val() == 'Slytherin') {
           $('#houseInfo').text('Slytherin house values ambition, cunning and resourcefulness.');
