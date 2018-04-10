@@ -19,11 +19,21 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-  <div class="cadc-xxv-info">
+  <div class="video-container" >
+    <style>
+    .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; }
+    .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+    <div class='embed-container'>
+      <iframe src='https://www.youtube.com/embed/zjYo1KPHNIk' >
+      </iframe>
+    </div>
+  </div>
+  <div class="cadc-xxv-info" >
     <h1> CADC XXV. </h1>
     <p> May 4, 2019 </p>
     <p> Let us know you're attending! </p>
   </div>
+
   <div class="form-container">
     <form name="cadc-xxv">
       <input name="firstName" id="firstName" type="text" placeholder="First Name*" required>
@@ -113,7 +123,8 @@
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => showSuccessMessage(response))
         .catch(error => showErrorMessage(error))
-    })
+    });
+
 
     function showLoadingIndicator () {
       form.classList.add('is-hidden')
