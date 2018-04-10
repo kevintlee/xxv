@@ -142,14 +142,14 @@
       showLoadingIndicator();
 
       // Inputs: firstName	lastName	email	phoneNumber	classYear	house	plusOne	plusOneName
-      var firstName=	$("#firstName").val();
-    	var lastName= $("#lastName").val();
-      var email= $("#email").val();
-      var phoneNumber= $("#phoneNumber").val();
-      var classYear= $("#classYear").val();
-      var house= $("#house").val();
-      var plusOne= $("#plusOne").val();
-      var plusOneName= $("#plusOneName").val();
+      var firstName=	$("#firstName").val().trim();
+    	var lastName= $("#lastName").val().trim();
+      var email= $("#email").val().trim();
+      var phoneNumber= $("#phoneNumber").val().trim();
+      var classYear= $("#classYear").val().trim();
+      var house= $("#house").val().trim();
+      var plusOne= $("#plusOne").val().trim();
+      var plusOneName= $("#plusOneName").val().trim();
 
       var url = scriptURL+"?callback=ctrlq&firstName="+firstName
                 +"&lastName="+lastName

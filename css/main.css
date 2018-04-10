@@ -204,12 +204,20 @@
       display: none;
     }
 
+    #my-table tbody tr {
+      text-align: left;
+    }
+
     #my-table tr:nth-child(n+6) {
       display: none;
     }
 
     #my-table tr td {
-      text-align: left;
+      display: inline-block;
+    }
+
+    #my-table tr td {
+      padding-right: 5px;
     }
 
     #my-table tr td:nth-child(3) {
