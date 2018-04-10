@@ -98,12 +98,10 @@
   </div>
 
   <script>
-
-
-    $("#my-table").sheetrock({
-      url: "https://docs.google.com/spreadsheets/d/1WeyPKnY8_AJQfucCa_KymIxwlJYfe1iyDRRhNQiYIZU/edit#gid=0",
-      query: "select B Where B <> 'false'"
-    });
+    // $("#my-table").sheetrock({
+    //   url: "https://docs.google.com/spreadsheets/d/1WeyPKnY8_AJQfucCa_KymIxwlJYfe1iyDRRhNQiYIZU/edit#gid=0",
+    //   query: "select B Where B <> 'false'"
+    // });
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxRThLf23LehDMqMFLZlwdWwF_9XYHYA_H9p2LVN4RoeRhzS-E/exec'
     const form = document.forms['cadc-xxv']
@@ -207,6 +205,7 @@
       }
     });
 
+    // Show more records
     var btnMore = $("#seeMoreRecords");
     var showCount = 5;
     btnMore.click(function (e) {
@@ -221,7 +220,6 @@
         }
       });
     });
-
   </script>
 
 </body>
