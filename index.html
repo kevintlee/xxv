@@ -217,23 +217,21 @@
       maxItems = $('#my-table tr').length - 1;
       showCount += 5;
       $('#my-table tr').each(function(index, item) {
-        if (maxItems === index){
-          btnMore.hide();
-        } else {
+        if (index < showCount){
           $(item).show();
         }
       });
+      btnMore.hide();
     });
 
     setTimeout(function() {
       var tableLength = $('#my-table tr').length;
-      console.log(tableLength);
       if (tableLength > 6) {
         btnMore.show();
       } else {
         btnMore.hide();
       }
-    }, 100);
+    }, 1000);
   </script>
 
 </body>
