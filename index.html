@@ -12,7 +12,7 @@
 
   <script src="http://code.jquery.com/jquery.js"></script>
   <script src="js/sheetrock.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -20,8 +20,12 @@
 
 
   <div class="cadc-xxv-info" >
-      <img class="img-responsive hidden-xs" src="images/RSVPBanner_1024.png" >
-      <img class="img-responsive visible-xs" src="images/RSVPBanner_300.png">
+      <img class="img-responsive hidden-xs" style="
+      max-width: 1024px;
+      max-height:400px;
+      margin: 0 auto;
+  " src="images/Square.png" >
+      <img style="max-height:300px;" class="img-responsive visible-xs" src="images/Square.png">
 
     <!--
     <h1> CADC XXV. </h1>
@@ -78,8 +82,15 @@
       <div class="form-group">
         <p class="plusOneDescription">If your +1 is DC, please only submit one RSVP.</p>
         <input class="plusOneName" id="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
-        <button onClick="insert_value()" type="submit" id="b1">Send RSVP</button>
+        
       </div>
+ 
+      
+        
+        <input class="inputMargin" id="comments" name="comments" type="text" placeholder="Comments">
+      
+
+      <button onClick="insert_value()" type="submit" id="b1">Send RSVP</button>
     </form>
 
     <div class="loading js-loading is-hidden">
@@ -156,7 +167,9 @@
       var classYear= $("#classYear").val().trim();
       var house= $("#house").val().trim();
       var plusOne= $("#plusOne").val().trim();
+
       var plusOneName= $("#plusOneName").val().trim();
+      var comments = $("#comments").val().trim();
 
       var url = scriptURL+"?callback=ctrlq&firstName="+firstName
                 +"&lastName="+lastName
@@ -166,6 +179,7 @@
                 +"&house="+houseImg
                 +"&plusOne="+plueOne
                 +"&plueOneName="+plueOneName
+                +"&comments="+comments
                 +"&action=insert";
 
 
@@ -211,7 +225,7 @@
 
     // Show more records
     var btnMore = $("#seeMoreRecords");
-    var showCount = 5;
+    var showCount = 20;
     btnMore.click(function (e) {
       e.preventDefault();
       maxItems = $('#my-table tr').length - 1;
