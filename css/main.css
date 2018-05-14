@@ -22,7 +22,7 @@
       flex-flow: column;
       padding-bottom: 15px;
       margin: 0 auto;
-      
+
       text-align: center
     }
 
@@ -198,6 +198,8 @@
 
     .going {
       width: 100%;
+      height: 100px;
+      overflow-x: scroll;
     }
 
     #my-table thead {
@@ -206,10 +208,6 @@
 
     #my-table tbody tr {
       text-align: left;
-    }
-
-    #my-table tr:nth-child(n+6) {
-      display: none;
     }
 
     #my-table tr td {
@@ -232,9 +230,20 @@
       content: ')';
     }
 
-    .going p {
+    #my-table {
+      width: 100%;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      border-collapse: collapse;
+    }
+
+    .table-heading {
       font-weight: bold;
       text-align: left;
+      padding-top: 50px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gray);
+      width: 100%;
     }
 
     @media (max-width:767px){.hidden-xs{display:none!important}}

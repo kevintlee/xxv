@@ -12,7 +12,7 @@
 
   <script src="http://code.jquery.com/jquery.js"></script>
   <script src="js/sheetrock.min.js"></script>
- 
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -50,7 +50,7 @@
         <option value="zeta">Zeta</option>
         <option value="eta">Eta</option>
         <option value="theta">Theta</option>
-        <option value="iota">Gamma</option>
+        <option value="iota">Iota</option>
         <option value="kappa">Kappa</option>
         <option value="lambda">Lambda</option>
         <option value="mu">Mu</option>
@@ -82,13 +82,13 @@
       <div class="form-group">
         <p class="plusOneDescription">If your +1 is DC, please only submit one RSVP.</p>
         <input class="plusOneName" id="plusOneName" name="plusOneName" type="text" placeholder="+1 Name*">
-        
+
       </div>
- 
-      
-        
+
+
+
         <input class="inputMargin" id="comments" name="comments" type="text" placeholder="Comments">
-      
+
 
       <button onClick="insert_value()" type="submit" id="b1">Send RSVP</button>
     </form>
@@ -102,11 +102,10 @@
     <p class="js-success-message is-hidden">Thank you for your RSVP!</p>
     <p class="js-error-message is-hidden">Oops. Something went wrong, please try again.</p>
 
-    <div class="going" style="padding-top:50px" >
-      <p>Who's attending?</p>
+    <p class="table-heading">Who's attending?</p>
+    <div id="going" class="going">
       <table id="my-table"></table>
     </div>
-    <input type="button" id="seeMoreRecords" value="Show more attendees" class='secondary-button'>
   </div>
   <div class="video-container">
     <iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/zjYo1KPHNIk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
@@ -223,29 +222,26 @@
       }
     });
 
-    // Show more records
-    var btnMore = $("#seeMoreRecords");
-    var showCount = 20;
-    btnMore.click(function (e) {
-      e.preventDefault();
-      maxItems = $('#my-table tr').length - 1;
-      showCount += 5;
-      $('#my-table tr').each(function(index, item) {
-        if (index < showCount){
-          $(item).show();
-        }
-      });
-      btnMore.hide();
-    });
-
+    var my_time;
     setTimeout(function() {
-      var tableLength = $('#my-table tr').length;
-      if (tableLength > 6) {
-        btnMore.show();
-      } else {
-        btnMore.hide();
-      }
+      pageScroll();
+      $("#going").mouseover(function() {
+        clearTimeout(my_time);
+      }).mouseout(function() {
+        pageScroll();
+      });
     }, 1000);
+
+
+    function pageScroll() {
+      var objDiv = document.getElementById("going");
+      objDiv.scrollTop = objDiv.scrollTop + 1;
+      if (objDiv.scrollTop == (objDiv.scrollHeight - 100)) {
+        objDiv.scrollTop = 0;
+        console.log(1);
+      }
+      my_time = setTimeout('pageScroll()', 25);
+    }
   </script>
 
 </body>
